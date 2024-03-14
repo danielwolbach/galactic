@@ -6,7 +6,6 @@ mod window;
 
 use adw::Application;
 use config::Config;
-use error::Result;
 use gtk::prelude::*;
 use window::Window;
 
@@ -20,18 +19,15 @@ fn main() {
 }
 
 fn activate(application: &Application) {
-    let window = setup(application);
+    let config = Config::load_toml("config.toml").unwrap_or_else(|error| {
+        eprintln!("Failed to load configuration: {error}");
+        Config::default()
+    });
+
+    let window = Window::new(application, &config);
+
     match window {
         Ok(window) => window.present(),
-        Err(error) => {
-            eprintln!("{error}");
-            application.quit()
-        }
-    }
-}
-
-fn setup(application: &Application) -> Result<Window> {
-    let config = Config::load_toml("config.toml")?;
-    let window = Window::new(application, &config)?;
-    Ok(window)
+        Err(error) => eprintln!("Failed to initialize window: {error}"),
+    };
 }

@@ -2,8 +2,9 @@
 name = "galactic"
 version = "0.1.0"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+license = "MIT"
+description = "Beautifully minimal terminal emulator"
+repository = "https://github.com/danielwolbach/galactic"
 
 [dependencies]
 adw = { version = "0.6.0", package = "libadwaita", features = ["v1_4"] }
@@ -12,3 +13,13 @@ gtk = { version = "0.8.1", package = "gtk4", features = ["v4_12", "blueprint"] }
 serde = { version = "1.0.197", features = ["derive"] }
 toml = "0.8.11"
 vte = { version = "0.7.1", package = "vte4" }
+
+[package.metadata.generate-rpm]
+auto-req = "auto"
+assets = [
+  { source = "target/release/galactic", dest = "/usr/bin/", mode = "755" },
+  { source = "data/io.github.danielwolbach.Galactic.desktop", dest = "/usr/share/applications/", mode = "644" },
+  { source = "data/icons/io.github.danielwolbach.Galactic.svg", dest = "/usr/share/icons/hicolor/scalable/apps/", mode = "644" },
+]
+
+
