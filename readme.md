@@ -127,6 +127,16 @@ palette = [
 Contributions in any way are very welcome. However, please stick to existing
 styles of patterns and formatting.
 
+### Development
+
+You need to have the latest stable version of Rust installed. GTK build
+dependencies need to be installed seperately:
+
+```sh
+# Use DNF on Fedora
+dnf install gcc gtk4-devel libadwaita-devel vte291-gtk4-devel
+```
+
 ## License
 
 See [License](license.md) for more information.
