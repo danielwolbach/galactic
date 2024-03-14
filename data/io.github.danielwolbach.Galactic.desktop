@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+TryExec=galactic
+Exec=galactic
+Terminal=false
+Name=Galactic
+Icon=io.github.danielwolbach.Galactic
+GenericName=Terminal
+Categories=System;TerminalEmulator;
+Comment=Beautifully minimal terminal emulator
+StartupNotify=true
+StartupWMClass=Galactic
