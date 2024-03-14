@@ -12,7 +12,7 @@ use window::Window;
 
 fn main() {
     let application = Application::builder()
-        .application_id("dev.danielwolbach.Galactic")
+        .application_id("io.github.danielwolbach.Galactic")
         .build();
 
     application.connect_activate(activate);
