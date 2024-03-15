@@ -143,7 +143,12 @@ dependencies need to be installed seperately:
 
 ```sh
 # Use DNF on Fedora
-dnf install gcc gtk4-devel libadwaita-devel vte291-gtk4-devel
+dnf install gcc blueprint-compiler gtk4-devel libadwaita-devel vte291-gtk4-devel
+```
+
+```sh
+# Use Pacman on Arch
+pacman -S base-devel blueprint-compiler gtk4 libadwaita vte4
 ```
 
 ## License
