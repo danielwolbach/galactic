@@ -9,9 +9,17 @@ use config::Config;
 use gtk::prelude::*;
 use window::Window;
 
+#[cfg(debug_assertions)]
+#[allow(dead_code)]
+static APPLICATION_ID: &str = "io.github.danielwolbach.Galactic.Devel";
+
+#[cfg(not(debug_assertions))]
+#[allow(dead_code)]
+static APPLICATION_ID: &str = "io.github.danielwolbach.Galactic";
+
 fn main() {
     let application = Application::builder()
-        .application_id("io.github.danielwolbach.Galactic")
+        .application_id(APPLICATION_ID)
         .build();
 
     application.connect_activate(activate);

@@ -5,7 +5,7 @@ use gtk::{
     glib::{self, Object},
 };
 use std::str::FromStr;
-use vte::{ApplicationExt, GtkWindowExt, PtyFlags, TerminalExt, TerminalExtManual, WidgetExt};
+use vte::{GtkWindowExt, PtyFlags, TerminalExt, TerminalExtManual, WidgetExt};
 
 glib::wrapper! {
     pub struct Window(ObjectSubclass<imp::Window>)
@@ -37,10 +37,8 @@ impl Window {
             |_| {},
         );
 
-        let app_clone = app.clone();
-        terminal.connect_eof(move |_| {
-            app_clone.quit();
-        });
+        let window_clone = window.clone();
+        terminal.connect_child_exited(move |_, _| window_clone.close());
 
         // Configure size.
         {
@@ -154,7 +152,7 @@ mod imp {
     #[template(string = "
     using Gtk 4.0;
     using Adw 1;
-    using Vte 2.91;
+    using Vte 3.91;
     template $GalacticApplicationWindow : Adw.ApplicationWindow {
         Box {
             orientation: vertical;
