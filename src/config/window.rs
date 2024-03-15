@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct Window {
     #[serde(default = "Window::default_title")]
     pub title: String,
@@ -16,6 +17,7 @@ pub struct Window {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct Size {
     #[serde(default = "Size::default_width")]
     pub width: u32,
@@ -25,6 +27,7 @@ pub struct Size {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct Padding {
     #[serde(default = "Padding::default_horizontal")]
     pub horizontal: u32,

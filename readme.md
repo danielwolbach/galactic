@@ -23,7 +23,7 @@ The configuration under the `[general]` section.
 #### Command
 
 ```
-command = "<string>" | ["<string>"]
+command = ["<string>"]
 ```
 
 The command that will be run in the terminal. Defaults to the `$SHELL`
@@ -79,7 +79,7 @@ The default size of the window in pixels. Defaults to
 #### Padding
 
 ```
-padding = { x = <integer>, y = <integer> }
+padding = { horizontal = <integer>, vertical = <integer> }
 ```
 
 The default padding inside the window in pixels. Defaults to `{ x = 8, y = 8 }`.

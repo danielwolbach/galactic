@@ -7,6 +7,7 @@ pub mod general;
 pub mod window;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct Config {
     #[serde(default = "Config::default_general")]
     pub general: General,
