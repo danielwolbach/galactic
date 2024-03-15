@@ -1,5 +1,8 @@
 use adw::prelude::*;
-use gtk::{gio, glib};
+use gtk::{
+    gio::{self},
+    glib,
+};
 use tracing_subscriber::EnvFilter;
 use ui::application::Application;
 
@@ -14,7 +17,7 @@ fn main() -> glib::ExitCode {
         .with_env_filter(EnvFilter::from_default_env())
         .init();
 
-    let application = Application::new(&gio::ApplicationFlags::empty());
+    let application = Application::new(&gio::ApplicationFlags::NON_UNIQUE);
 
     static EMPTY_ARGS: Vec<String> = vec![];
     application.run_with_args(&EMPTY_ARGS)
