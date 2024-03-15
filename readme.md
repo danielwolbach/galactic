@@ -4,12 +4,11 @@ Beautifully minimal terminal emulator.
 
 ## About
 
-You might question the necessity of yet another GTK terminal emulator, given the
-plethora of existing options. However, many of these alternatives are
-feature-rich and rely heavily on complex graphical configuration. Galactic, on
-the other hand, stands out by embracing simplicity. It adopts a traditional
-approach, utilizing a straightforward configuration file and avoiding additional
-graphical features apart from the terminal itself.
+You might be wondering: _Why yet another GTK terminal emulator?_ Galactic stands
+out for its simplicity. While other terminal emulators come with a slew of
+features and complex setups, Galactic keeps things straightforward. No flashy
+configuration menus with lots of toggles, just a simple config file and the
+terminal itself.
 
 ## Configuration
 
