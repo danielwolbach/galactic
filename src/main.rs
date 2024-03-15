@@ -1,41 +1,21 @@
+use adw::prelude::*;
+use gtk::{gio, glib};
+use tracing_subscriber::EnvFilter;
+use ui::application::Application;
+
 mod config;
-mod error;
+mod constants;
+mod options;
 mod theme;
-mod utils;
-mod window;
+mod ui;
 
-use adw::Application;
-use config::Config;
-use gtk::prelude::*;
-use window::Window;
+fn main() -> glib::ExitCode {
+    tracing_subscriber::fmt()
+        .with_env_filter(EnvFilter::from_default_env())
+        .init();
 
-#[cfg(debug_assertions)]
-#[allow(dead_code)]
-static APPLICATION_ID: &str = "io.github.danielwolbach.Galactic.Devel";
+    let application = Application::new(&gio::ApplicationFlags::empty());
 
-#[cfg(not(debug_assertions))]
-#[allow(dead_code)]
-static APPLICATION_ID: &str = "io.github.danielwolbach.Galactic";
-
-fn main() {
-    let application = Application::builder()
-        .application_id(APPLICATION_ID)
-        .build();
-
-    application.connect_activate(activate);
-    application.run();
-}
-
-fn activate(application: &Application) {
-    let config = Config::load_toml("config.toml").unwrap_or_else(|error| {
-        eprintln!("Failed to load configuration: {error}");
-        Config::default()
-    });
-
-    let window = Window::new(application, &config);
-
-    match window {
-        Ok(window) => window.present(),
-        Err(error) => eprintln!("Failed to initialize window: {error}"),
-    };
+    static EMPTY_ARGS: Vec<String> = vec![];
+    application.run_with_args(&EMPTY_ARGS)
 }

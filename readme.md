@@ -122,6 +122,15 @@ palette = [
 ]
 ```
 
+## Options
+
+Command line options can be used to alter the behavior of the application.
+
+| Option             | Description                           |
+| ------------------ | ------------------------------------- |
+| `--default-config` | Use the default configuration         |
+| `--config-dir`     | Overwrite the configuration directory |
+
 ## Contributing
 
 Contributions in any way are very welcome. However, please stick to existing

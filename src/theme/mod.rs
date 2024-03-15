@@ -1,22 +1,30 @@
-use crate::{config::Config, error::Result};
-use serde::Deserialize;
-use std::path::{Path, PathBuf};
+use self::error::Result;
+use serde::{Deserialize, Serialize};
+use std::{fmt::Debug, path::Path};
 
-#[derive(Debug, Deserialize)]
+mod deserialize;
+mod error;
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Theme {
+    #[serde(deserialize_with = "deserialize::color")]
     pub foreground: String,
+
+    #[serde(deserialize_with = "deserialize::color")]
     pub background: String,
+
+    #[serde(deserialize_with = "deserialize::color_palette")]
     pub palette: Vec<String>,
 }
 
 impl Theme {
-    pub fn load_toml<P: AsRef<Path>>(path: P) -> Result<Self> {
-        let contents = std::fs::read_to_string(Self::directory().join(path))?;
-        Ok(toml::from_str(&contents)?)
-    }
-
-    pub fn directory() -> PathBuf {
-        Config::directory().join("themes")
+    pub fn load<P>(path: P) -> Result<Self>
+    where
+        P: AsRef<Path> + Debug,
+    {
+        tracing::info!("Loading theme from {path:?}.");
+        let file_contents = std::fs::read_to_string(path)?;
+        Ok(toml::from_str(&file_contents)?)
     }
 }
 

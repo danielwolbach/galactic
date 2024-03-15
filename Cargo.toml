@@ -3,16 +3,20 @@ name = "galactic"
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
-description = "Beautifully minimal terminal emulator"
+description = "Beautifully minimal terminal emulator."
 repository = "https://github.com/danielwolbach/galactic"
 
 [dependencies]
-adw = { version = "0.6.0", package = "libadwaita", features = ["v1_4"] }
+clap = { version = "4.5.3", features = ["derive"] }
 dirs = "5.0.1"
-gtk = { version = "0.8.1", package = "gtk4", features = ["v4_12", "blueprint"] }
+regex = "1.10.3"
 serde = { version = "1.0.197", features = ["derive"] }
 toml = "0.8.11"
+adw = { version = "0.6.0", package = "libadwaita", features = ["v1_4"] }
+gtk = { version = "0.8.1", package = "gtk4", features = ["v4_12", "blueprint"] }
 vte = { version = "0.7.1", package = "vte4" }
+tracing = "0.1.40"
+tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
 
 [package.metadata.generate-rpm]
 auto-req = "auto"
@@ -21,5 +25,3 @@ assets = [
   { source = "data/io.github.danielwolbach.Galactic.desktop", dest = "/usr/share/applications/", mode = "644" },
   { source = "data/icons/io.github.danielwolbach.Galactic.svg", dest = "/usr/share/icons/hicolor/scalable/apps/", mode = "644" },
 ]
-
-
