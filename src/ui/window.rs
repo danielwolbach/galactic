@@ -1,7 +1,7 @@
 use crate::config::Config;
 use crate::theme::Theme;
 use adw::{prelude::*, subclass::prelude::*};
-use gtk::{gio, glib};
+use gtk::{gdk, gio, glib};
 use std::str::FromStr;
 use vte::prelude::*;
 
@@ -170,6 +170,31 @@ mod imp {
 
     impl ObjectImpl for Window {
         fn constructed(&self) {
+            // Set up copy and paste.
+            let event_key_controller = gtk::EventControllerKey::new();
+            let terminal_copy = self.terminal.clone();
+            event_key_controller.connect_key_pressed(move |_, key, _, modifier_type| {
+                let mask = gdk::ModifierType::CONTROL_MASK.union(gdk::ModifierType::SHIFT_MASK);
+                if !modifier_type.symmetric_difference(mask).is_empty() {
+                    return glib::Propagation::Proceed;
+                }
+
+                match key.name().unwrap_or_default().to_lowercase().as_str() {
+                    "v" => {
+                        terminal_copy.emit_paste_clipboard();
+                        terminal_copy.unselect_all();
+                        glib::Propagation::Stop
+                    }
+                    "c" if terminal_copy.has_selection() => {
+                        terminal_copy.emit_copy_clipboard();
+                        terminal_copy.unselect_all();
+                        glib::Propagation::Stop
+                    }
+                    _ => glib::Propagation::Proceed,
+                }
+            });
+            self.terminal.add_controller(event_key_controller);
+
             self.parent_constructed();
         }
     }

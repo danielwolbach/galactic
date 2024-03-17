@@ -14,7 +14,7 @@ serde = { version = "1.0.197", features = ["derive"] }
 toml = "0.8.11"
 adw = { version = "0.6.0", package = "libadwaita", features = ["v1_4"] }
 gtk = { version = "0.8.1", package = "gtk4", features = ["v4_12", "blueprint"] }
-vte = { version = "0.7.1", package = "vte4" }
+vte = { version = "0.7.1", package = "vte4", features = ["v0_74"] }
 tracing = "0.1.40"
 tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
 
