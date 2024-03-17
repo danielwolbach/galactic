@@ -170,24 +170,42 @@ mod imp {
 
     impl ObjectImpl for Window {
         fn constructed(&self) {
-            // Set up copy and paste.
+            // Set up keyboard shortcuts.
             let event_key_controller = gtk::EventControllerKey::new();
             let terminal_copy = self.terminal.clone();
             event_key_controller.connect_key_pressed(move |_, key, _, modifier_type| {
-                let mask = gdk::ModifierType::CONTROL_MASK.union(gdk::ModifierType::SHIFT_MASK);
-                if !modifier_type.symmetric_difference(mask).is_empty() {
+                let mask = gdk::ModifierType::CONTROL_MASK;
+                if modifier_type.intersection(mask).is_empty() {
                     return glib::Propagation::Proceed;
                 }
 
-                match key.name().unwrap_or_default().to_lowercase().as_str() {
-                    "v" => {
+                match key.name().unwrap_or_default().as_str() {
+                    "V" => {
+                        tracing::debug!("Paste from clipboard");
                         terminal_copy.emit_paste_clipboard();
                         terminal_copy.unselect_all();
                         glib::Propagation::Stop
                     }
-                    "c" if terminal_copy.has_selection() => {
+                    "C" if terminal_copy.has_selection() => {
+                        tracing::debug!("Copy selection to clipboard");
                         terminal_copy.emit_copy_clipboard();
                         terminal_copy.unselect_all();
+                        glib::Propagation::Stop
+                    }
+                    "plus" => {
+                        tracing::debug!("Scale font up");
+                        terminal_copy
+                            .set_font_scale(10.0_f64.min(terminal_copy.font_scale() + 0.1));
+                        glib::Propagation::Stop
+                    }
+                    "minus" => {
+                        tracing::debug!("Scale font down");
+                        terminal_copy.set_font_scale(0.1_f64.max(terminal_copy.font_scale() - 0.1));
+                        glib::Propagation::Stop
+                    }
+                    "0" => {
+                        tracing::debug!("Reset font scale");
+                        terminal_copy.set_font_scale(1.0);
                         glib::Propagation::Stop
                     }
                     _ => glib::Propagation::Proceed,
