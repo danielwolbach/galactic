@@ -22,7 +22,7 @@ impl Theme {
     where
         P: AsRef<Path> + Debug,
     {
-        tracing::info!("Loading theme from {path:?}.");
+        tracing::info!("Load theme from {path:?}.");
         let file_contents = std::fs::read_to_string(path)?;
         Ok(toml::from_str(&file_contents)?)
     }

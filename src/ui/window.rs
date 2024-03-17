@@ -20,7 +20,7 @@ impl Window {
     }
 
     pub fn apply_config(&self, config: &Config) {
-        tracing::debug!("Applying config `{config:?}`.");
+        tracing::debug!("Apply config `{config:?}`.");
 
         // Spawn terminal child process.
         let terminal = self.imp().terminal.get();
@@ -42,7 +42,7 @@ impl Window {
         );
         let window_clone = self.clone();
         terminal.connect_child_exited(move |_, _| {
-            tracing::info!("Terminal child process exited. Closing window.");
+            tracing::info!("Terminal child process exited. Close window.");
             window_clone.close()
         });
 
@@ -81,7 +81,7 @@ impl Window {
     }
 
     pub fn apply_theme(&self, theme: &Theme) {
-        tracing::debug!("Applying theme `{theme:?}`.");
+        tracing::debug!("Apply theme `{theme:?}`.");
 
         // Translate colors to `gtk::gdk::RGBA` colors. Unwrapping is safe
         // because the theme deserializer checks for valid hex values.
@@ -181,30 +181,30 @@ mod imp {
 
                 match key.name().unwrap_or_default().as_str() {
                     "V" => {
-                        tracing::debug!("Paste from clipboard");
+                        tracing::debug!("Paste from clipboard.");
                         terminal_copy.emit_paste_clipboard();
                         terminal_copy.unselect_all();
                         glib::Propagation::Stop
                     }
                     "C" if terminal_copy.has_selection() => {
-                        tracing::debug!("Copy selection to clipboard");
+                        tracing::debug!("Copy selection to clipboard.");
                         terminal_copy.emit_copy_clipboard();
                         terminal_copy.unselect_all();
                         glib::Propagation::Stop
                     }
                     "plus" => {
-                        tracing::debug!("Scale font up");
+                        tracing::debug!("Scale font up.");
                         terminal_copy
                             .set_font_scale(10.0_f64.min(terminal_copy.font_scale() + 0.1));
                         glib::Propagation::Stop
                     }
                     "minus" => {
-                        tracing::debug!("Scale font down");
+                        tracing::debug!("Scale font down.");
                         terminal_copy.set_font_scale(0.1_f64.max(terminal_copy.font_scale() - 0.1));
                         glib::Propagation::Stop
                     }
                     "0" => {
-                        tracing::debug!("Reset font scale");
+                        tracing::debug!("Reset font scale.");
                         terminal_copy.set_font_scale(1.0);
                         glib::Propagation::Stop
                     }

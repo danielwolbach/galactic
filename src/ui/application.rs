@@ -10,8 +10,10 @@ glib::wrapper! {
 
 impl Application {
     pub fn new(flags: &gio::ApplicationFlags) -> Self {
+        let id = constants::APPLICATION_ID;
+        tracing::info!("Create application with id `{id}`.");
         glib::Object::builder()
-            .property("application-id", constants::APPLICATION_ID)
+            .property("application-id", id)
             .property("flags", flags)
             .build()
     }
@@ -38,8 +40,6 @@ mod imp {
 
     impl ApplicationImpl for Application {
         fn activate(&self) {
-            tracing::info!("Application launched.");
-
             let application = self.obj();
             let window = Window::new(&*application);
 
@@ -51,13 +51,13 @@ mod imp {
             );
 
             let config = if options.default_config {
-                tracing::info!("Using default config.");
+                tracing::info!("Use default config.");
                 Config::default()
             } else {
                 let config_path = config_path.join("config.toml");
                 Config::load(&config_path).unwrap_or_else(|error| {
                     tracing::error!("Failed to get config from path {config_path:?}: {error}.");
-                    tracing::info!("Using default config.");
+                    tracing::info!("Use default config.");
                     Config::default()
                 })
             };
@@ -66,19 +66,19 @@ mod imp {
                 let theme_path = config_path.join("themes").join(format!("{theme}.toml"));
                 Theme::load(&theme_path).unwrap_or_else(|error| {
                     tracing::error!("Failed to get theme from path {theme_path:?}: {error}.");
-                    tracing::info!("Using default theme.");
+                    tracing::info!("Use default theme.");
                     Theme::default()
                 })
             } else {
-                tracing::info!("Using default theme.");
+                tracing::info!("Use default theme.");
                 Theme::default()
             };
 
-            tracing::info!("Applying config and theme.");
+            tracing::info!("Apply config and theme.");
             window.apply_config(&config);
             window.apply_theme(&theme);
 
-            tracing::info!("Presenting window.");
+            tracing::info!("Present window.");
             window.present();
         }
     }

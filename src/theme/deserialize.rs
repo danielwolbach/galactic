@@ -8,7 +8,7 @@ where
     let color = String::deserialize(deserializer)?;
     let regex = Regex::new(r"^#[0-9a-fA-F]{6}$").unwrap();
 
-    tracing::trace!("Validation hex color {color}.");
+    tracing::trace!("Validate hex color {color}.");
 
     if !regex.is_match(&color) {
         return Err(serde::de::Error::custom(format!(
@@ -26,7 +26,7 @@ where
     static EXPECTED_PALETTE_SIZE: usize = 16;
     let colors: Vec<String> = Vec::deserialize(deserializer)?;
 
-    tracing::debug!("Deserializing color paette ``{colors:?}``");
+    tracing::debug!("Deserialize color paette ``{colors:?}``");
 
     if colors.len() != EXPECTED_PALETTE_SIZE {
         return Err(serde::de::Error::custom(format!(
@@ -37,7 +37,7 @@ where
 
     let regex = Regex::new(r"^#[0-9a-fA-F]{6}$").unwrap();
     for color in &colors {
-        tracing::trace!("Validation hex color {color}.");
+        tracing::trace!("Validate hex color {color}.");
         if !regex.is_match(color) {
             return Err(serde::de::Error::custom(format!(
                 "Invalid hex color {color}."

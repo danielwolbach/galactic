@@ -21,7 +21,7 @@ impl Config {
     where
         P: AsRef<Path> + Debug,
     {
-        tracing::info!("Loading config from {path:?}.");
+        tracing::info!("Load config from {path:?}.");
         let file_contents = std::fs::read_to_string(path)?;
         Ok(toml::from_str(&file_contents)?)
     }
