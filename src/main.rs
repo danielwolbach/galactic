@@ -14,7 +14,7 @@ mod ui;
 
 fn main() -> glib::ExitCode {
     tracing_subscriber::fmt()
-        .with_env_filter(EnvFilter::from_default_env())
+        .with_env_filter(EnvFilter::from_env("GALACTIC_LOG"))
         .init();
 
     let application = Application::new(&gio::ApplicationFlags::NON_UNIQUE);
