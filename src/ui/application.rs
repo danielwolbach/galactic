@@ -74,11 +74,9 @@ mod imp {
                 Theme::default()
             };
 
-            tracing::info!("Apply config and theme.");
             window.apply_config(&config);
             window.apply_theme(&theme);
 
-            tracing::info!("Present window.");
             window.present();
         }
     }
