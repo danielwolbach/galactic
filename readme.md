@@ -130,6 +130,18 @@ palette = [
 ]
 ```
 
+## Shortcuts
+
+Galactic supports several keyboard shortcuts.
+
+| Shortcut           | Description                 |
+| ------------------ | --------------------------- |
+| `Ctrl` `Shift` `C` | Copy selection to clipboard |
+| `Ctrl` `Shift` `V` | Paste from clipboard        |
+| `Ctrl` `+`         | Increase text zoom          |
+| `Ctrl` `-`         | Decrease text zoom          |
+| `Ctrl` `0`         | Reset text zoom             |
+
 ## Options
 
 Command line options can be used to alter the behavior of the application.

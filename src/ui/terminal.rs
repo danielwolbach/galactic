@@ -138,10 +138,15 @@ mod imp {
             let event_key_controller = gtk::EventControllerKey::new();
             let terminal_copy = self.terminal.clone();
             event_key_controller.connect_key_pressed(move |_, key, _, modifier_type| {
-                let mask = gdk::ModifierType::CONTROL_MASK;
-                if modifier_type.intersection(mask).is_empty() {
+                let shortcut_mask = gdk::ModifierType::CONTROL_MASK;
+                if modifier_type.intersection(shortcut_mask).is_empty() {
                     return glib::Propagation::Proceed;
                 }
+
+                tracing::trace!(
+                    "Pressed key with shortcut mask: `{}`",
+                    key.name().unwrap_or_default()
+                );
 
                 match key.name().unwrap_or_default().as_str() {
                     "V" => {
@@ -156,13 +161,13 @@ mod imp {
                         terminal_copy.unselect_all();
                         glib::Propagation::Stop
                     }
-                    "plus" => {
+                    "plus" | "equal" => {
                         tracing::debug!("Scale font up.");
                         terminal_copy
                             .set_font_scale(10.0_f64.min(terminal_copy.font_scale() + 0.1));
                         glib::Propagation::Stop
                     }
-                    "minus" => {
+                    "minus" | "underscore" => {
                         tracing::debug!("Scale font down.");
                         terminal_copy.set_font_scale(0.1_f64.max(terminal_copy.font_scale() - 0.1));
                         glib::Propagation::Stop
