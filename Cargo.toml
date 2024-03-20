@@ -18,6 +18,10 @@ vte = { version = "0.7.1", package = "vte4", features = ["v0_74"] }
 tracing = "0.1.40"
 tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
 
+[profile.release]
+lto = "fat"
+codegen-units = 1
+
 [package.metadata.generate-rpm]
 auto-req = "auto"
 assets = [
