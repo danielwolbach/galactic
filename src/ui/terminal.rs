@@ -176,6 +176,9 @@ mod imp {
                 }
             });
             self.terminal.add_controller(event_key_controller);
+
+            // Disable bell sound.
+            self.terminal.set_audible_bell(false);
         }
     }
 
