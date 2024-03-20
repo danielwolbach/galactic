@@ -7,7 +7,7 @@ pub struct Options {
     #[arg(long, default_value_t = false, help = "Use the default config")]
     pub default_config: bool,
 
-    #[arg(long, help = "Overwrite the config path")]
+    #[arg(long, help = "Use a custom configuration directory")]
     pub config_path: Option<PathBuf>,
 }
 

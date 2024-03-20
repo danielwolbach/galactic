@@ -90,7 +90,8 @@ The default size of the window in pixels. Defaults to
 padding = { horizontal = <integer>, vertical = <integer> }
 ```
 
-The default padding inside the window in pixels. Defaults to `{ x = 8, y = 8 }`.
+The default padding inside the window in pixels. Defaults to
+`{ horizontal = 8, vertical = 8 }`.
 
 ## Themes
 
@@ -133,10 +134,12 @@ palette = [
 
 Command line options can be used to alter the behavior of the application.
 
-| Option             | Description                           |
-| ------------------ | ------------------------------------- |
-| `--default-config` | Use the default configuration         |
-| `--config-dir`     | Overwrite the configuration directory |
+| Option             | Description                          |
+| ------------------ | ------------------------------------ |
+| `--default-config` | Use the default configuration        |
+| `--config-dir`     | Use a custon configuration directory |
+| `-h`, `--help`     | Print help                           |
+| `-V`, `--version`  | Print version                        |
 
 ## Contributing
 
@@ -150,12 +153,12 @@ dependencies need to be installed seperately:
 
 ```sh
 # Use DNF on Fedora
-dnf install gcc blueprint-compiler gtk4-devel libadwaita-devel vte291-gtk4-devel
+sudo dnf install gcc blueprint-compiler gtk4-devel libadwaita-devel vte291-gtk4-devel
 ```
 
 ```sh
 # Use Pacman on Arch
-pacman -S base-devel blueprint-compiler gtk4 libadwaita vte4
+sudo pacman -S base-devel blueprint-compiler gtk4 libadwaita vte4
 ```
 
 ## License
