@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="128" alt="Galactic App Icon" src="data/icons/io.github.danielwolbach/Galactic.svg">
+  <img width="128" alt="Galactic App Icon" src="data/icons/io.github.danielwolbach.Galactic.svg">
 </p>
 
 <h1 align="center">
