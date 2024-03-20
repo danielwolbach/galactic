@@ -70,7 +70,7 @@ The title that will be displayed in the header bar. Defaults to `"Galactic"`.
 #### Scroll Bar
 
 ```
-scroll_bar = true | false
+scroll_bar = <boolean>
 ```
 
 Whether to show a vertical scroll bar or not. Defaults to `true`.
@@ -138,8 +138,8 @@ Command line options can be used to alter the behavior of the application.
 | ------------------ | ------------------------------------ |
 | `--default-config` | Use the default configuration        |
 | `--config-dir`     | Use a custon configuration directory |
-| `-h`, `--help`     | Print help                           |
-| `-V`, `--version`  | Print version                        |
+| `-h` `--help`      | Print help                           |
+| `-V` `--version`   | Print version                        |
 
 ## Contributing
 
