@@ -1,6 +1,14 @@
-# Galactic
+<p align="center">
+  <img width="128" alt="Galactic App Icon" src="data/icons/io.github.danielwolbach/Galactic.svg">
+</p>
 
-Beautifully minimal terminal emulator.
+<h1 align="center">
+  Galactic
+</h1>
+
+<p align="center">
+  Beautifully minimal terminal emulator
+</p>
 
 ## About
 
